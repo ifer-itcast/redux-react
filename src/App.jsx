@@ -5,6 +5,7 @@ import Profile from './profile';
 
 export default class App extends Component {
     render() {
+
         return (
             <div>
                 <Home/>

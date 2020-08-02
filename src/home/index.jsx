@@ -3,27 +3,19 @@ import store from '../store';
 import { addAction } from '../store/actionCreators';
 
 export default class Home extends Component {
-    state = {
-        num: store.getState().num
-    };
+    // 注意 store 变化时 state 这里并不会执行了
+    // state = {
+    //     num: store.getState().num
+    // };
     add = num => {
         store.dispatch(addAction(num));
-    }
-    componentDidMount() {
-        this.unsubscribe = store.subscribe(() => {
-            this.setState({
-                num: store.getState().num
-            });
-        });
-    }
-    componentWillUnmount() {
-        store.unsubscribe(this.unsubscribe);
     }
     render() {
         return (
             <div>
                 Home
-                <p>{this.state.num}</p>
+                {/* 所以这里取数据时就不要从 state 里取了 */}
+                <p>{store.getState().num}</p>
                 <button onClick={() => this.add(1)}>加1</button>
                 <button onClick={() => this.add(3)}>加3</button>
             </div>
